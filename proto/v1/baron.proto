@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package baron.v1;
+
+import "proto/v1/common/utils.proto";
+
+message Feedback {
+  string user_id = 1;
+  string ride_id = 2;
+  string comments = 3;
+  int32 rating = 4; // e.g., 1-5
+}
+
+message FeedbackRequest {
+  repeated Feedback feedbacks = 1;
+}
+
+message FeedbackResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service BaronService {
+  rpc SubmitFeedback(FeedbackRequest) returns (FeedbackResponse);
+  rpc GetFeedback(FeedbackRequest) returns (FeedbackResponse);
+}
